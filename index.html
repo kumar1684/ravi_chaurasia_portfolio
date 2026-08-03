@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ravi Chaurasia · Software Developer</title>
+  <!-- Favicon: Globe emoji as SVG -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -109,7 +111,7 @@
     @keyframes spin { to { transform: rotate(360deg); } }
     #loader p { margin-top: 1rem; font-weight: 300; letter-spacing: 2px; color: #8b949e; font-size: 0.8rem; }
 
-    /* ----- PROGRESS BAR (fixed, not overlapping) ----- */
+    /* ----- PROGRESS BAR ----- */
     #progress-bar {
       position: fixed;
       top: 0;
@@ -120,6 +122,31 @@
       width: 0%;
       transition: width 0.1s ease;
       pointer-events: none;
+    }
+
+    /* ----- CUSTOM CURSOR (working) ----- */
+    .custom-cursor {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(88, 166, 255, 0.25);
+      border: 2px solid #58A6FF;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.2s ease, width 0.2s ease, height 0.2s ease;
+      transform: translate(-50%, -50%);
+      backdrop-filter: blur(4px);
+      display: none;
+    }
+    @media (pointer: fine) {
+      .custom-cursor { display: block; }
+    }
+    .custom-cursor.hover {
+      width: 40px;
+      height: 40px;
+      background: rgba(88, 166, 255, 0.1);
+      border-width: 2.5px;
     }
 
     /* ----- NAVBAR ----- */
@@ -178,27 +205,6 @@
       .nav-links.open { transform: translateY(0); }
       .hamburger { display: flex; }
     }
-
-    /* ----- POINTER CURSOR FEATURE ----- */
-    .pointer-feature {
-      position: fixed;
-      bottom: 2rem;
-      left: 2rem;
-      background: rgba(22, 27, 34, 0.8);
-      backdrop-filter: blur(8px);
-      padding: 0.5rem 1.2rem;
-      border-radius: 40px;
-      border: 1px solid rgba(255,255,255,0.06);
-      font-size: 0.75rem;
-      color: #8b949e;
-      z-index: 99;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      pointer-events: none;
-      opacity: 0.6;
-    }
-    .pointer-feature i { color: #58A6FF; }
 
     /* ----- HERO ----- */
     .hero {
@@ -339,7 +345,7 @@
     .edu-item .year { font-weight: 600; color: #58A6FF; }
     .edu-item .cgpa { color: #238636; font-weight: 600; }
 
-    /* ----- JOURNEY (with arrows & design) ----- */
+    /* ----- JOURNEY ----- */
     .journey { padding: 4rem 0; background: #0D1117; }
     .journey-timeline {
       display: flex;
@@ -360,7 +366,6 @@
       transition: all 0.25s ease;
       font-weight: 500;
       font-size: 0.85rem;
-      position: relative;
     }
     .journey-step:hover {
       background: rgba(88,166,255,0.08);
@@ -456,13 +461,16 @@
     .hackathon-item .year { font-weight: 700; color: #58A6FF; min-width: 70px; }
     .hackathon-item .result { background: #238636; padding: 0.15rem 0.8rem; border-radius: 30px; font-size: 0.7rem; font-weight: 600; }
 
+    /* ----- ACHIEVEMENTS & CERTIFICATIONS (fixed gap) ----- */
+    .achievements { margin-top: 2.5rem; }
+    .achievements h3 { margin-top: 2rem; margin-bottom: 0.8rem; color: #c9d1d9; font-size: 1.2rem; }
     .achieve-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.8rem; margin: 0.8rem 0; }
     .achieve-card { background: rgba(255,255,255,0.02); padding: 0.6rem 1rem; border-radius: 40px; border: 1px solid rgba(255,255,255,0.03); display: flex; align-items: center; gap: 8px; font-size: 0.85rem; }
     .achieve-card i { color: #238636; font-size: 1rem; }
-    .cert-grid { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .cert-grid { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.5rem; }
     .cert-grid span { background: rgba(255,255,255,0.03); padding: 0.3rem 1.2rem; border-radius: 30px; border: 1px solid rgba(255,255,255,0.04); font-size: 0.8rem; }
 
-    /* ----- BUILDING (all same size, highlight removed) ----- */
+    /* ----- BUILDING ----- */
     .building { padding: 4rem 0; background: radial-gradient(ellipse at 50% 30%, rgba(35,134,54,0.03), transparent 60%); }
     .building-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; }
     .build-card { padding: 1.5rem 1rem; text-align: center; }
@@ -470,16 +478,13 @@
     .build-card h4 { font-weight: 600; font-size: 1rem; }
     .build-card p { color: #8b949e; font-size: 0.8rem; }
 
-    /* ----- CONTACT (removed form, kept info) ----- */
+    /* ----- CONTACT (no form, no github section) ----- */
     .contact { padding: 4rem 0; background: #0D1117; }
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
     .contact-info { padding: 1.8rem; }
     .contact-info p { margin: 0.6rem 0; display: flex; align-items: center; gap: 10px; color: #c9d1d9; font-size: 0.9rem; }
     .contact-info i { width: 20px; color: #58A6FF; }
     .resume-btn { margin-top: 1rem; }
-    .github-section { margin-top: 2rem; padding: 1.5rem 1.8rem; }
-    .github-stats { display: flex; flex-wrap: wrap; gap: 1rem; color: #8b949e; font-size: 0.85rem; }
-    .github-stats span { background: rgba(255,255,255,0.02); padding: 0.2rem 0.8rem; border-radius: 30px; }
 
     /* ----- FOOTER ----- */
     footer {
@@ -520,7 +525,6 @@
       .hero h1 { font-size: 2.6rem; }
       .typing-wrapper { font-size: 1.3rem; }
       .section-title { font-size: 1.8rem; }
-      .pointer-feature { display: none; }
     }
     @media (max-width: 480px) {
       .hero h1 { font-size: 2rem; }
@@ -536,8 +540,8 @@
   <!-- Progress Bar -->
   <div id="progress-bar"></div>
 
-  <!-- Pointer Feature -->
-  <div class="pointer-feature"><i class="fas fa-mouse-pointer"></i> Interactive cursor · hover elements</div>
+  <!-- Custom Cursor -->
+  <div class="custom-cursor" id="customCursor"></div>
 
   <!-- Navbar -->
   <nav class="navbar" id="navbar">
@@ -608,7 +612,7 @@
     </div>
   </section>
 
-  <!-- JOURNEY with arrows -->
+  <!-- JOURNEY -->
   <section id="journey" class="journey">
     <div class="container">
       <h2 class="section-title">Development Journey</h2>
@@ -640,7 +644,7 @@
     </div>
   </section>
 
-  <!-- PROJECTS (Campus Connect main, JanConnect normal) -->
+  <!-- PROJECTS -->
   <section id="projects" class="projects">
     <div class="container">
       <h2 class="section-title">Featured Projects</h2>
@@ -665,7 +669,7 @@
           </div>
         </div>
 
-        <!-- JanConnect - normal -->
+        <!-- JanConnect -->
         <div class="project-card glass-card">
           <div class="project-img">
             <img src="janconnect-screenshot.png" alt="JanConnect" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -750,7 +754,7 @@
         <div class="skill-card glass-card"><i class="fas fa-cloud"></i><h4>Laravel · React · Docker</h4><p>Learning</p></div>
       </div>
 
-      <!-- 7. Tech Decision Matrix -->
+      <!-- Tech Decision Matrix -->
       <div class="decision-matrix">
         <h3>Tech Decision Matrix</h3>
         <div class="matrix-grid">
@@ -761,7 +765,7 @@
         </div>
       </div>
 
-      <!-- 8. Competitive Analysis -->
+      <!-- Competitive Analysis -->
       <div class="competitive-analysis">
         <h3>Competitive Analysis: JanConnect</h3>
         <table class="competitive-table">
@@ -776,7 +780,7 @@
         </table>
       </div>
 
-      <!-- 12. Open Source Wall -->
+      <!-- Open Source Wall -->
       <div class="open-source">
         <h3>Open Source Contributions</h3>
         <div class="oss-wall">
@@ -787,7 +791,7 @@
         </div>
       </div>
 
-      <!-- 13. Hackathon Highlights -->
+      <!-- Hackathon Highlights -->
       <div class="hackathons">
         <h3>Hackathon Highlights</h3>
         <div class="hackathon-timeline">
@@ -798,7 +802,7 @@
         </div>
       </div>
 
-      <!-- Achievements & Certifications -->
+      <!-- Achievements & Certifications (fixed gap) -->
       <div class="achievements">
         <h3>Achievements</h3>
         <div class="achieve-grid">
@@ -817,7 +821,7 @@
     </div>
   </section>
 
-  <!-- BUILDING (all cards equal, highlight removed) -->
+  <!-- BUILDING -->
   <section id="building" class="building">
     <div class="container">
       <h2 class="section-title">Currently Building</h2>
@@ -830,7 +834,7 @@
     </div>
   </section>
 
-  <!-- CONTACT (removed form) -->
+  <!-- CONTACT (no form, no github section) -->
   <section id="contact" class="contact">
     <div class="container">
       <h2 class="section-title">Contact & Resume</h2>
@@ -847,12 +851,6 @@
           <i class="fas fa-paper-plane" style="font-size: 3rem; color: #58A6FF; margin-bottom: 1rem;"></i>
           <h3 style="color: #c9d1d9; font-weight: 600;">Let's Connect</h3>
           <p style="color: #8b949e; max-width: 300px;">I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.</p>
-        </div>
-      </div>
-      <div class="github-section glass-card">
-        <h3>GitHub <i class="fab fa-github"></i></h3>
-        <div class="github-stats">
-          <span>⭐ 12 repos</span><span>📌 Pinned: CertiSure, JanConnect, SnapMart</span><span>📊 Top: PHP, JavaScript</span>
         </div>
       </div>
     </div>
@@ -910,6 +908,19 @@
     for (let i = 0; i < 60; i++) particles.push(new Particle());
     function animateParticles() { ctx.clearRect(0, 0, w, h); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animateParticles); }
     animateParticles();
+
+    // ----- CUSTOM CURSOR (working) -----
+    const cursor = document.getElementById('customCursor');
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+    // Add hover effect on all interactive elements
+    const hoverElements = document.querySelectorAll('a, button, .btn, .project-card, .skill-card, .journey-step, .build-card, .glass-card, .social-icons a, .nav-links a');
+    hoverElements.forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
 
     // ----- SCROLL PROGRESS -----
     window.addEventListener('scroll', () => {
